@@ -22,11 +22,13 @@ App has full rubocop coverage.
 #### Success Response
 > **Code:** 200
 <br>
+
 > **Content:** '4O6FKB3G7E'
 
 #### Error Response
 > **Code:** 422 Unprocessable Entry
 <br>
+
 > **Content:** 'Text to encode is invalid'
 
 ---
@@ -45,9 +47,11 @@ App has full rubocop coverage.
 #### Success Response:
 > **Code:** 200
 <br>
+
 > **Content:** 'FFFFFFRRRF'
 
 #### Error Response
 > Code: 422 Unprocessable Entry
 <br>
+
 > Content: 'Text to encode is invalid'
