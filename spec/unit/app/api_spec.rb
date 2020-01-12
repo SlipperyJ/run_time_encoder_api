@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../app/api'
+require_relative '../../../app/api'
+require_relative '../../../lib/encoder'
 require 'rack/test'
 
 # rubocop:disable Metrics/BlockLength
@@ -12,7 +13,7 @@ RSpec.describe API do
   end
 
   describe 'POST /encode' do
-    let(:converter) { instance_double("Encoder") }
+    let(:converter) { Encoder }
 
     context 'when the text is successfully encoded' do
       text_to_encode = 'text_to_encode'
