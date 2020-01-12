@@ -18,4 +18,15 @@ class API < Sinatra::Base
   rescue EncodingError
     [422, {}, ['Text to encode is invalid']]
   end
+
+  post '/decode' do
+    text_to_decode = request.body.read
+
+    result = @converter.call(text_to_decode)
+
+    [200, {}, [result]]
+
+  rescue DecodingError
+    [422, {}, ['Text to decode is invalid']]
+  end
 end

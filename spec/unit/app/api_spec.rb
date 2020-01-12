@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative '../../../app/api'
-require_relative '../../../lib/encoder'
 require 'rack/test'
 
 # rubocop:disable Metrics/BlockLength
@@ -58,4 +57,52 @@ RSpec.describe API do
       end
     end
   end
+
+  describe 'POST /decode' do
+    let(:converter) { Decoder }
+
+    context 'when the text is successfully decoded' do
+      text_to_decode = 'text_to_decode'
+
+      before do
+        allow(converter).to receive(:call)
+          .with(text_to_decode)
+          .and_return('decoded_text')
+      end
+
+      it 'returns the decoded text' do
+        post '/decode', text_to_decode
+
+        expect(last_response.body).to eq('decoded_text')
+      end
+
+      it 'responds with 200 (OK)' do
+        post '/decode', text_to_decode
+
+        expect(last_response.status).to eq(200)
+      end
+    end
+
+    context 'when the text fails validation' do
+      text_to_decode = 'text_to_decode'
+
+      before do
+        allow(converter).to receive(:call)
+          .with(text_to_decode)
+          .and_raise(DecodingError, 'Text to decode is invalid')
+      end
+
+      it 'returns an error message' do
+        post '/decode', text_to_decode
+
+        expect(last_response.body).to eq('Text to decode is invalid')
+      end
+      it 'responds with a 422 (Unprocessable entity)' do
+        post '/decode', text_to_decode
+
+        expect(last_response.status).to eq(422)
+      end
+    end
+  end
 end
+# rubocop:enable Metrics/BlockLength
