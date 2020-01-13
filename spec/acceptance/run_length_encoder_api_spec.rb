@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rack/test'
-require 'json'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe 'Run Length Encoder API' do

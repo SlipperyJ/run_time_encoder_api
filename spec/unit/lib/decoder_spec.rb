@@ -12,6 +12,14 @@ RSpec.describe Decoder do
       end
     end
 
+    context 'when the text to decode is empty' do
+      let(:text_to_decode) { '' }
+
+      it 'does not modify the text' do
+        expect(described_class.call(text_to_decode)).to eq('')
+      end
+    end
+
     context 'when the text to decode is invalid' do
       let(:text_to_decode) { :wrong_datatype }
 
