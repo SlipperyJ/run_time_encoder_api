@@ -2,6 +2,7 @@
 
 require_relative '../../../lib/decoder'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe Decoder do
   describe '#decode' do
     context 'when the text to decode is valid' do
@@ -39,3 +40,4 @@ RSpec.describe Decoder do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
